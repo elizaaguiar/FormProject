@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, Form, AbstractControl, ValidationErrors } from '@angular/forms';
 
+
+//crie um arquivo para essas funcoes que sao validacoes
 function validarNome(control: AbstractControl): ValidationErrors [string] {
   const name = control.value;
   if(name == null) {
@@ -10,7 +12,8 @@ function validarNome(control: AbstractControl): ValidationErrors [string] {
   //   return {nomeInvalido: true}
   // }
 }
-
+//usar input="number" para o usuario nao conseguir escrever letras
+// estudar sobre diretivas, para nao deixa o usuario escrever 'e' e '.'
 function validarIdade(control: AbstractControl): ValidationErrors [number] | null {
   const valor = control.value;
   if(!Number.isInteger(valor)){
@@ -18,6 +21,9 @@ function validarIdade(control: AbstractControl): ValidationErrors [number] | nul
   }
   return null;
 }
+//existe validacoes que vc pode aplicar no formGroup inteiro para poder verificar os valores de qualquer formControl, como o seu caso
+// vc quer consultar o valor de idadepai e idadefilho (dois formControls), acredito que esse seja o caso, entao
+// pesquise sobre validators no FORMGROUP.
 function validarPaternidade(control: AbstractControl): ValidationErrors | null {
   const valor = control.value;
   if(valor == null) {
