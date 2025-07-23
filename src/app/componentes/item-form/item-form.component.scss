@@ -1,0 +1,71 @@
+.container {
+    background-color: #f5aaaa;
+    padding: 60px 40px 50px 40px;
+    border-radius: 1vh;
+    border: #1f1f1f 2px solid;
+    max-width: 70vh;
+    color: #313131;
+}
+.formInput {
+    outline: none;
+    border: #1f1f1f 1px solid;
+    border-radius: 1vh;
+    padding: 5px 5px 5px 10px;
+    background-color: antiquewhite;
+}
+.formInput:focus {
+    border: #a13434 1px solid;
+    background-color: #a54f4f;
+    color:antiquewhite;
+}
+.formInput:hover {
+    border: #a13434 1px solid
+}
+.formItens {
+    display: flex;
+    flex-direction: column;
+    align-items: end-start;
+    color: #1f1f1f;
+    font-weight: 600;
+}
+
+.bitcount-single {
+  font-family: "Bitcount Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 100 – 900;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+.formButton {
+    background-color: #a13434;
+    border: #1f1f1f 1px solid;
+    border-radius: 1vh;
+    padding: 5px 5px 5px 10px;
+    margin: 2vh 0 0 0;
+    color:rgb(255, 252, 247);
+    cursor: pointer;
+}
+.formButton:hover {
+    background-color: #611f1f;
+}
+.error {
+    color:#df1717;
+    font-size: 1rem;
+    max-width: 350px;
+    text-align: justify;
+}
+@media (max-width: 290px) {
+    .container {
+    background-color: #f5aaaa;
+    padding: 60px 10px 60px 10px;
+    border-radius: 1vh;
+    max-width: 70vh;
+    display: flex;
+    justify-content: end;
+}
+
+}
