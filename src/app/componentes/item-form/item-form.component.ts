@@ -1,28 +1,16 @@
-import { Component, Directive } from '@angular/core';
+import { Component, Directive, HostListener } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, Form, AbstractControl, ValidationErrors } from '@angular/forms';
-import { NG_VALIDATORS } from '@angular/forms';
-import { forwardRef } from '@angular/core';
-import { Validator } from '@angular/forms';
 
 @Directive({
   selector: '[inputCaracters]',
-  standalone: true,
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => InputCaractersDirective),
-      multi: true
-    }
-  ]
+  standalone: true
 })
-export class InputCaractersDirective implements Validator {
-  validate(control: AbstractControl): ValidationErrors | null {
-    const valor= String(control.value);
-    const regex = '/.e/';
-    if (/regex/.test(String(control.value))){
-      return { numberInvalid: true };
+export class InputCaractersDirective {
+ @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === '.' || event.key.toLowerCase() === 'e') {
+      event.preventDefault();
     }
-    return null;
   }
 }
 function validarPaternidade(control: AbstractControl): ValidationErrors | null {
@@ -52,7 +40,7 @@ interface FormUser {
 
 @Component({
   selector: 'app-item-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputCaractersDirective],
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.scss'
 })

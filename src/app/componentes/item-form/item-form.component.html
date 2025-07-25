@@ -38,7 +38,7 @@
       <div>
          <label class="mb-2 mt-2 gap-3 ageLabel">
             Idade Pai:
-            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput">
+            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput" inputCaracters>
          </label>
          <div class="error">
             @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
@@ -56,7 +56,7 @@
          </div>
          <label class="mb-2 mt-2 gap-3 ageLabel">
             Idade Filho:
-            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput">
+            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput" inputCaracters>
          </label>
          <div class="error">
             @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){
