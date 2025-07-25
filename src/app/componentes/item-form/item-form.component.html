@@ -21,6 +21,18 @@
          }
          }
       </div>
+      <div formArrayName="primos">
+      <div *ngFor="let primo of primos; let index = index" [formGroupName]="index">
+         Primos:
+         <label class="mb-2 flex gap-3">
+            <input class="formInput w-[100%]" formControlName="newPrimos" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
+            <div (click)="removePrimo(index)" class="remove-btn">
+            <i class="ph-bold ph-x"></i>
+          </div>
+         </label>
+      </div>
+      </div>
+      
       <label class="mb-2 mt-2 flex gap-3 ">
          Email:
          <input formControlName="email" class="formInput w-[100%]" [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
