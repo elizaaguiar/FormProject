@@ -1,82 +1,78 @@
-<form [formGroup] = "form" class="container flex flex-col ">
-<header class="mb-9 text-center font-bold text-4xl">
-Formulário
-</header>
-<div class="w-[100%] formItens text-xl">
-   <label class="mb-2 flex gap-3">
-      Nome:
-      <input formControlName="nome" class="formInput w-[100%]">
-   
-   </label>
-   <div class="error">
-   @if(form.controls.nome.invalid && form.get('nome')?.touched){
-      @if (form.get('nome')?.errors?.['required'] && form.get('nome')?.touched) {
+<form [formGroup]="form" class="container flex flex-col">
+   <header class="mb-9 text-center font-bold text-4xl">
+      Formulário
+   <hr class="hrStyle mt-5">
+   </header>
+   <div class="w-[100%] formItens text-xl">
+      <label class="mb-2 flex gap-3" >
+         Nome:
+         <input type="string" formControlName="nome" class="formInput w-[100%]" >
+      </label>
+      <div class="error">
+         @if(form.controls.nome.invalid && form.get('nome')?.touched){
+         @if (form.get('nome')?.errors?.['required'] && form.get('nome')?.touched) {
          NOME É OBRIGATÓRIO!
-      } 
-      @if (form.get('nome')?.errors?.['minlength'] && form.get('nome')?.touched){
+         }
+         @if (form.get('nome')?.errors?.['minlength'] && form.get('nome')?.touched){
          NOME PRECISA DE MÍNIMO DE 2 (DOIS) CARACTERES.
-      }
-      @if (form.get('nome')?.errors?.['maxlength'] && form.get('nome')?.touched){
+         }
+         @if (form.get('nome')?.errors?.['maxlength'] && form.get('nome')?.touched){
          NOME PRECISA DE MÁXIMO DE 200 (DUZENTOS) CARACTERES.
-      }
-   }  
-   </div>
-   <label class="mb-2 mt-2 flex gap-3 ">
-      Email: 
-      <input formControlName= "email" class="formInput w-[100%]">
-   
-   </label>
-   <div class="error">
-   @if(form.controls.email.invalid && form.get('email')?.touched){
-      @if (form.get('email')?.errors?.['required'] && form.get('email')?.touched){
+         }
+         }
+      </div>
+      <label class="mb-2 mt-2 flex gap-3 ">
+         Email:
+         <input formControlName="email" class="formInput w-[100%]">
+      </label>
+      <div class="error">
+         @if(form.controls.email.invalid && form.get('email')?.touched){
+         @if (form.get('email')?.errors?.['required'] && form.get('email')?.touched){
          EMAIL É OBRIGATÓRIO!
-      } 
-      @if (form.get('email')?.errors?.['email'] && form.get('email')?.touched){
+         }
+         @if (form.get('email')?.errors?.['email'] && form.get('email')?.touched){
          EMAIL EM FORMATO INVÁLIDO.
-      }
-   }  
-</div>
-<div>
-   <label class="mb-2 mt-2 flex gap-3">
-      Idade Pai: 
-      <input formControlName= "idadePai" class="formInput w-[100%]">
-   </label>
-   <div class="error">
-   @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
-      @if (form.get('idadePai')?.errors?.['required'] && form.get('idadePai')?.touched) {
-         IDADE É OBRIGATÓRIA!
-      } 
-      <!-- @if(form.get('idadePai')?.errors?.['naoInteiro'] && form.get('idadePai')?.touched){
-         IDADE PRECISA SER NÚMERO INTEIRO. 
-      } -->
-      @if(form.get('idadePai')?.errors?.['idadePai'] && form.get('idadePai')?.touched){
-         IDADE INSUFICIENTE PRA SER PAI. 
-      }
-      
-   }  
-   
+         }
+         }
+      </div>
+      <div>
+         <label class="mb-2 mt-2 gap-3 ageLabel">
+            Idade Pai:
+            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput">
+         </label>
+         <div class="error">
+            @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
+            @if (form.get('idadePai')?.errors?.['numberInvalid'] && form.get('idadePai')?.touched) {
+            IDADE INVÁLIDA!
+            }
+            @if (form.get('idadePai')?.errors?.['required'] && form.get('idadePai')?.touched) {
+            IDADE É OBRIGATÓRIA!
+            }
+            
+            @if(form.get('idadePai')?.errors?.['idadePai'] && form.get('idadePai')?.touched){
+            IDADE INSUFICIENTE PRA SER PAI.
+            }
+            }
+         </div>
+         <label class="mb-2 mt-2 gap-3 ageLabel">
+            Idade Filho:
+            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput">
+         </label>
+         <div class="error">
+            @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){
+            @if (form.get('idadeFilho')?.errors?.['numberInvalid'] && form.get('idadeFilho')?.touched) {
+            IDADE INVÁLIDA!
+            }
+            @if (form.get('idadeFilho')?.errors?.['required'] && form.get('idadeFilho')?.touched) {
+            IDADE É OBRIGATÓRIA!
+            }
+            
+            @if(form.get('idadeFilho')?.errors?.['idadeFilho'] && form.get('idadeFilho')?.touched){
+            IDADE INSUFICIENTE PRA SER FILHO.
+            }
+            }
+         </div>
+      </div>
    </div>
-</div>
-   <div>
-      <label class="mb-2 mt-2 flex gap-3">
-      Idade Filho: 
-      <input formControlName= "idadeFilho" class="formInput w-[100%]">
-   </label>
-   <div class="error">
-   @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){
-      @if (form.get('idadeFilho')?.errors?.['required'] && form.get('idadeFilho')?.touched) {
-         IDADE É OBRIGATÓRIA!
-      } 
-      <!-- @if(form.get('idadeFilho')?.errors?.['naoInteiro'] && form.get('idadeFilho')?.touched){
-         IDADE PRECISA SER NÚMERO INTEIRO. 
-      } -->
-      @if(form.get('idadeFilho')?.errors?.['idadeFilho'] && form.get('idadeFilho')?.touched){
-         IDADE INSUFICIENTE PRA SER FILHO. 
-      }
-   }  
-   </div>
-   </div>
-</div>
- <button class="formButton text-xl" (click)="onSubmit()">Enviar</button>
+   <button class="formButton text-xl" (click)="onSubmit()">Enviar</button>
 </form>
-
