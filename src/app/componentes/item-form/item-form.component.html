@@ -6,7 +6,7 @@
    <div class="w-[100%] formItens text-xl">
       <label class="mb-2 flex gap-3" >
          Nome:
-         <input type="string" formControlName="nome" class="formInput w-[100%]" >
+         <input type="string" formControlName="nome" class="formInput w-[100%]" [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
       </label>
       <div class="error">
          @if(form.controls.nome.invalid && form.get('nome')?.touched){
@@ -23,7 +23,7 @@
       </div>
       <label class="mb-2 mt-2 flex gap-3 ">
          Email:
-         <input formControlName="email" class="formInput w-[100%]">
+         <input formControlName="email" class="formInput w-[100%]" [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
       </label>
       <div class="error">
          @if(form.controls.email.invalid && form.get('email')?.touched){
@@ -38,7 +38,7 @@
       <div>
          <label class="mb-2 mt-2 gap-3 ageLabel">
             Idade Pai:
-            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput" inputCaracters>
+            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
          </label>
          <div class="error">
             @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
@@ -56,7 +56,7 @@
          </div>
          <label class="mb-2 mt-2 gap-3 ageLabel">
             Idade Filho:
-            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput" inputCaracters>
+            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
          </label>
          <div class="error">
             @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){

@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, Directive, HostListener } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, Form, AbstractControl, ValidationErrors } from '@angular/forms';
 
@@ -40,7 +41,7 @@ interface FormUser {
 
 @Component({
   selector: 'app-item-form',
-  imports: [ReactiveFormsModule, InputCaractersDirective],
+  imports: [ReactiveFormsModule, InputCaractersDirective, NgClass],
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.scss'
 })
