@@ -6,7 +6,7 @@ import { ItemFormComponent } from "./componentes/item-form/item-form.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BaseUiComponent, ItemFormComponent, ReactiveFormsModule],
+  imports: [ BaseUiComponent, ItemFormComponent, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

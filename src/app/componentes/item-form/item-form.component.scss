@@ -28,19 +28,6 @@
     color: #1f1f1f;
     font-weight: 600;
 }
-
-.bitcount-single {
-  //essas propridades nao deveriam estar aqui, tentar tirar
-  font-family: "Bitcount Single", system-ui;
-  font-optical-sizing: auto;
-  font-weight: 100 – 900;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0;
-}
 .formButton {
     background-color: #a13434;
     border: #1f1f1f 1px solid;
@@ -59,6 +46,23 @@
     max-width: 350px;
     text-align: justify;
 }
+.ageLabel {
+    display: flex;
+    flex-direction: row;
+}
+.ageInput {
+    max-width: 5rem;
+    text-align: center;
+}
+.hrStyle {
+    outline: none;
+    border: 1px solid #1f1f1f;
+    max-width: 100%;
+}
+.inputError {
+    border: #df1717 1px solid;
+}
+
 @media (max-width: 290px) {
     .container {
     background-color: #f5aaaa;
