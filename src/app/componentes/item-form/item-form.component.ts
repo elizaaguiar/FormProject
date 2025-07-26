@@ -14,6 +14,9 @@ export class InputCaractersDirective {
     }
   }
 }
+//existe validacoes que vc pode aplicar no formGroup inteiro para poder verificar os valores de qualquer formControl, como o seu caso
+// vc quer consultar o valor de idadepai e idadefilho (dois formControls), acredito que esse seja o caso, entao
+// pesquise sobre validators no FORMGROUP.
 function validarPaternidade(control: AbstractControl): ValidationErrors | null {
   const valor = control.value;
   if (valor == null) {
