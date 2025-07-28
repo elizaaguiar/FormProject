@@ -1,6 +1,7 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, Directive, HostListener } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, Form, AbstractControl, ValidationErrors, FormArray } from '@angular/forms';
+
 
 @Directive({
   selector: '[inputCaracters]',
@@ -14,9 +15,6 @@ export class InputCaractersDirective {
     }
   }
 }
-//existe validacoes que vc pode aplicar no formGroup inteiro para poder verificar os valores de qualquer formControl, como o seu caso
-// vc quer consultar o valor de idadepai e idadefilho (dois formControls), acredito que esse seja o caso, entao
-// pesquise sobre validators no FORMGROUP.
 function validarPaternidade(control: AbstractControl): ValidationErrors | null {
   const valor = control.value;
   if (valor == null) {
@@ -51,7 +49,8 @@ interface FormUser {
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.scss'
 })
-export class ItemFormComponent implements ValidationErrors {
+export class ItemFormComponent {
+  
   form: FormGroup<FormUser>;
   constructor() {
     this.form = new FormGroup<FormUser>({
@@ -63,12 +62,12 @@ export class ItemFormComponent implements ValidationErrors {
       primos: new FormArray<FormGroup<PrimoForm>>([]),
     });
   }
-ngOnInit() {
-  this.addPrimo(); 
-}
+  ngOnInit() {
+    this.addPrimo();
+  }
   get primos(): FormArray<FormGroup<PrimoForm>> {
-  return this.form.get('primos') as FormArray<FormGroup<PrimoForm>>;
-}
+    return this.form.get('primos') as FormArray<FormGroup<PrimoForm>>;
+  }
 
   addPrimo() {
     const newPrimo = new FormGroup<PrimoForm>({
@@ -77,10 +76,9 @@ ngOnInit() {
         validators: [Validators.required, Validators.minLength(2), Validators.maxLength(200)]
       })
     });
-    
     this.primos.push(newPrimo);
   }
-  removePrimo(index: number){
+  removePrimo(index: number) {
     this.primos.controls.splice(index, 1);
   }
   onSubmit() {

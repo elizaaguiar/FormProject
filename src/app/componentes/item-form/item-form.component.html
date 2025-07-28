@@ -1,13 +1,16 @@
 <form [formGroup]="form" class="container flex flex-col">
    <header class="mb-9 text-center font-bold text-4xl">
       Formulário
-   <hr class="hrStyle mt-5">
+      <hr class="hrStyle mt-5">
    </header>
-   <div class="w-[100%] formItens text-xl">
-      <label class="mb-2 flex gap-3" >
-         Nome:
-         <input type="string" formControlName="nome" class="formInput w-[100%]" [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
-      </label>
+   <div class="formItens text-xl flex flex-col">
+      <p>Nome </p>
+      <div class="flex items-center">
+         <label class="mb-2 flex w-[100%]">
+            <input type="string" formControlName="nome" class="formInput w-[100%]"
+               [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
+         </label>
+      </div>
       <div class="error">
          @if(form.controls.nome.invalid && form.get('nome')?.touched){
          @if (form.get('nome')?.errors?.['required'] && form.get('nome')?.touched) {
@@ -21,22 +24,40 @@
          }
          }
       </div>
+      <p>Nome Primos </p>
       <div formArrayName="primos">
-      <div *ngFor="let primo of primos; let index = index" [formGroupName]="index">
-         Primos:
-         <label class="mb-2 flex gap-3">
-            <input class="formInput w-[100%]" formControlName="newPrimos" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
-            <div (click)="removePrimo(index)" class="remove-btn">
-            <i class="ph-bold ph-x"></i>
-          </div>
+         @for (primo of primos.controls; track $index) {
+         <div [formGroupName]="$index" class="flex flex-col">
+            <label class="mb-2 flex items-center w-[100%]">
+               <input class="formInput w-[100%]" formControlName="nome" inputCaracters
+                  [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
+            </label>
+         <div (click)="addPrimo()" class="remove-btn">
+            <i class="fas fa-plus plus-btn"></i>
+         </div>
+         </div>
+         }
+         <div class="error">
+            @if(form.controls.nome.invalid && form.get('nome')?.touched){
+            @if (form.get('nome')?.errors?.['required'] && form.get('nome')?.touched) {
+            NOME É OBRIGATÓRIO!
+            }
+            @if (form.get('nome')?.errors?.['minlength'] && form.get('nome')?.touched){
+            NOME PRECISA DE MÍNIMO DE 2 (DOIS) CARACTERES.
+            }
+            @if (form.get('nome')?.errors?.['maxlength'] && form.get('nome')?.touched){
+            NOME PRECISA DE MÁXIMO DE 200 (DUZENTOS) CARACTERES.
+            }
+            }
+         </div>
+      </div>
+      <p>Email </p>
+      <div class="flex items-center">
+         <label class="mb-2 mt-2 flex w-[100%]">
+            <input formControlName="email" class="formInput w-[100%]"
+               [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
          </label>
       </div>
-      </div>
-      
-      <label class="mb-2 mt-2 flex gap-3 ">
-         Email:
-         <input formControlName="email" class="formInput w-[100%]" [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
-      </label>
       <div class="error">
          @if(form.controls.email.invalid && form.get('email')?.touched){
          @if (form.get('email')?.errors?.['required'] && form.get('email')?.touched){
@@ -47,42 +68,47 @@
          }
          }
       </div>
-      <div>
-         <label class="mb-2 mt-2 gap-3 ageLabel">
-            Idade Pai:
-            <input type="number" formControlName="idadePai" class="formInput w-[100%] ageInput" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
-         </label>
-         <div class="error">
-            @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
-            @if (form.get('idadePai')?.errors?.['numberInvalid'] && form.get('idadePai')?.touched) {
-            IDADE INVÁLIDA!
-            }
-            @if (form.get('idadePai')?.errors?.['required'] && form.get('idadePai')?.touched) {
-            IDADE É OBRIGATÓRIA!
-            }
-            
-            @if(form.get('idadePai')?.errors?.['idadePai'] && form.get('idadePai')?.touched){
-            IDADE INSUFICIENTE PRA SER PAI.
-            }
-            }
+      <div class="flex w-[1/2]">
+         <div>
+            <p age>Idade Pai</p>
+            <label class="mb-2 mt-2 ageLabel">
+               <input type="number" formControlName="idadePai" class="formInput ageInput w-[90%]" inputCaracters
+                  [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
+            </label>
+            <div class="error">
+               @if(form.controls.idadePai.invalid && form.get('idadePai')?.touched){
+               @if (form.get('idadePai')?.errors?.['numberInvalid'] && form.get('idadePai')?.touched) {
+               IDADE INVÁLIDA!
+               }
+               @if (form.get('idadePai')?.errors?.['required'] && form.get('idadePai')?.touched) {
+               IDADE É OBRIGATÓRIA!
+               }
+               @if(form.get('idadePai')?.errors?.['idadePai'] && form.get('idadePai')?.touched){
+               IDADE INSUFICIENTE PRA SER PAI.
+               }
+               }
+            </div>
          </div>
-         <label class="mb-2 mt-2 gap-3 ageLabel">
-            Idade Filho:
-            <input type="number" formControlName="idadeFilho" class="formInput w-[100%] ageInput" inputCaracters [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
-         </label>
-         <div class="error">
-            @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){
-            @if (form.get('idadeFilho')?.errors?.['numberInvalid'] && form.get('idadeFilho')?.touched) {
-            IDADE INVÁLIDA!
-            }
-            @if (form.get('idadeFilho')?.errors?.['required'] && form.get('idadeFilho')?.touched) {
-            IDADE É OBRIGATÓRIA!
-            }
-            
-            @if(form.get('idadeFilho')?.errors?.['idadeFilho'] && form.get('idadeFilho')?.touched){
-            IDADE INSUFICIENTE PRA SER FILHO.
-            }
-            }
+         <div class="flex flex-col">
+            <p>Idade Filho</p>
+            <label class="mb-2 mt-2 ageLabel">
+               <input type="number" formControlName="idadeFilho" class="formInput w-[90%] ageInput" inputCaracters
+                  [ngClass]="{'inputError': form.controls.nome.invalid && form.controls.nome.touched}">
+            </label>
+            <div class="error">
+               @if(form.controls.idadeFilho.invalid && form.get('idadeFilho')?.touched){
+               @if (form.get('idadeFilho')?.errors?.['numberInvalid'] && form.get('idadeFilho')?.touched) {
+               IDADE INVÁLIDA!
+               }
+               @if (form.get('idadeFilho')?.errors?.['required'] && form.get('idadeFilho')?.touched) {
+               IDADE É OBRIGATÓRIA!
+               }
+
+               @if(form.get('idadeFilho')?.errors?.['idadeFilho'] && form.get('idadeFilho')?.touched){
+               IDADE INSUFICIENTE PRA SER FILHO.
+               }
+               }
+            </div>
          </div>
       </div>
    </div>
