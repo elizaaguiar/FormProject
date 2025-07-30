@@ -42,7 +42,7 @@
 }
 .error {
     color:#df1717;
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 .ageInput {
     text-align: center;
@@ -58,7 +58,7 @@
 .inputError {
     border: #df1717 1px solid;
 }
-.remove-btn {
+.removeButton {
     max-width: fit-content;
     font-size: 1rem;
     background-color: #a13434;
@@ -68,7 +68,21 @@
     color:rgb(255, 252, 247);
     cursor: pointer;
     display: flex;
-    // align-items: center;
+}
+.addButton {
+    font-size: 1rem;
+    background-color: #a13434;
+    border: #1f1f1f 1px solid;
+    border-radius: 1vh;
+    padding: 5px 5px 5px 10px;
+    color:rgb(255, 252, 247);
+    cursor: pointer;
+    display: flex;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 @media (max-width: 290px) {
     .container {

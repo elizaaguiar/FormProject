@@ -68,7 +68,11 @@
     color:rgb(255, 252, 247);
     cursor: pointer;
     display: flex;
-    // align-items: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 @media (max-width: 290px) {
     .container {

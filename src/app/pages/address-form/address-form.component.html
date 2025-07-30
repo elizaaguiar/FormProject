@@ -1,0 +1,46 @@
+<form [formGroup]="form" class="formItens text-xl flex flex-col">
+   <div class="flex flex-col w-[1/2]">
+      <div>
+         <p age>CEP</p>
+         <label class="mb-2 mt-2 ageLabel">
+            <input type="number" formControlName="cep" class="formInput ageInput w-[100%]" inputCaracters>
+         </label>
+      </div>
+   </div>
+
+   <p>Logradouro</p>
+   <div class="flex items-center">
+      <label class="mb-2 flex w-[100%]">
+         <input type="string" formControlName="logradouro" class="formInput w-[100%]">
+      </label>
+   </div>
+
+   <p>Complemento</p>
+   <div class="flex items-center">
+      <label class="mb-2 flex w-[100%]">
+         <input type="string" formControlName="complemento" class="formInput w-[100%]">
+      </label>
+   </div>
+
+   <p>Bairro</p>
+   <div class="flex items-center">
+      <label class="mb-2 mt-2 flex w-[100%]">
+         <input formControlName="bairro" class="formInput w-[100%]">
+      </label>
+   </div>
+
+   <p>Cidade</p>
+   <div class="flex items-center">
+      <label class="mb-2 mt-2 flex w-[100%]">
+         <input formControlName="cidade" class="formInput w-[100%]">
+      </label>
+   </div>
+
+   <p>Estado</p>
+   <div class="flex items-center">
+      <label class="mb-2 mt-2 flex w-[100%]">
+         <input formControlName="estado" class="formInput w-[100%]">
+      </label>
+   </div>
+</form>
+<!-- <button class="formButton text-xl w-[100%]">Enviar</button> -->
