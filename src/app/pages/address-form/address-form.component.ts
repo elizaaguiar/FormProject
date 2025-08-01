@@ -32,7 +32,7 @@ export interface IAddress {
   styleUrl: './address-form.component.scss',
   standalone: true
 })
-export class AddressFormComponent implements OnInit {
+export class AddressFormComponent implements OnInit{
   form: FormGroup<IAddress>;
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.form = new FormGroup({
@@ -45,25 +45,38 @@ export class AddressFormComponent implements OnInit {
       id: new FormControl<string>('', { nonNullable: true })
     });
   }
-  ngOnInit() {
-    this.form.get('cep')!.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap(cep => this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`))
-      )
-      .subscribe(data => {
-        if (!data.erro) {
-          this.form.patchValue({
-            logradouro: data.logradouro,
-            complemento: data.complemento,
-            bairro: data.bairro,
-            cidade: data.cidade,
-            estado: data.estado,
-            id: data.id
-          });
-
+  addressForm() {
+    const dados = this.form.getRawValue();
+    this.http.post('http://localhost:4200/address', dados).subscribe({
+      next: res => console.log('Enviado com sucesso', res),
+      error: err => console.error('Erro ao enviar', err)
+    });
+  }
+  ngOnInit(): void {
+    this.form.get('cep')?.valueChanges.subscribe(cep => {
+      if (cep && cep.toString().length === 8) {
+        this.searchCep(cep);
+      }
+    });
+  }
+  searchCep(cep: number ): void {
+    this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
+      next: dados => {
+        if (dados.erro) {
+          console.warn('CEP não encontrado');
+          return;
         }
+        this.form.patchValue({
+          logradouro: dados.logradouro || '',
+          bairro: dados.bairro || '',
+          cidade: dados.localidade || '',
+          estado: dados.uf || ''
+        });
+      },
+      error: err => {
+        console.error('Erro ao buscar CEP', err);
+      }
+    });
+  }
 
-      }}
 }
