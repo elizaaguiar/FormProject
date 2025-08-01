@@ -1,9 +1,17 @@
 import { Component, Directive, HostListener } from '@angular/core';
 import { FormGroup, Validators, FormControl, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { OnInit } from '@angular/core';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, switchMap, tap } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+interface ViaCepData {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade : string;
+  estado: string;
+}
 @Directive({
   selector: '[inputCaracters]',
   standalone: true,
@@ -32,7 +40,7 @@ export interface IAddress {
   styleUrl: './address-form.component.scss',
   standalone: true
 })
-export class AddressFormComponent implements OnInit{
+export class AddressFormComponent implements OnInit {
   form: FormGroup<IAddress>;
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.form = new FormGroup({
@@ -59,24 +67,19 @@ export class AddressFormComponent implements OnInit{
       }
     });
   }
-  searchCep(cep: number ): void {
-    this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
-      next: dados => {
-        if (dados.erro) {
-          console.warn('CEP não encontrado');
-          return;
-        }
+
+  searchCep(cep: number): void {
+    this.http.get<ViaCepData>(`https://viacep.com.br/ws/${cep}/json/`).pipe(
+      tap((response: ViaCepData) => {
         this.form.patchValue({
-          logradouro: dados.logradouro || '',
-          bairro: dados.bairro || '',
-          cidade: dados.localidade || '',
-          estado: dados.uf || ''
+          logradouro: response.logradouro || '',
+          bairro: response.bairro || '',
+          cidade: response.localidade || '',
+          estado: response.estado || ''
         });
-      },
-      error: err => {
-        console.error('Erro ao buscar CEP', err);
-      }
-    });
+      }),
+      catchError((error) => of(console.error('Erro ao buscar CEP', error)))
+    ).subscribe();
   }
 
 }
